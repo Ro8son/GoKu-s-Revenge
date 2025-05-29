@@ -22,6 +22,7 @@ extends Node2D
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
 @onready var aunn_boss = preload("res://scenes/bosses/aunn.tscn")
 @onready var narumi_boss = preload("res://scenes/bosses/narumi.tscn")
+@onready var alice_boss = preload("res://scenes/bosses/alice.tscn")
 
 
 @onready var transition = $"SubViewportContainer/Main_Viewport/Transition"
@@ -203,6 +204,12 @@ func update_item_visuals(a: int):
 	
 #STAGES SECTION
 @export var stages = [
+	[
+		"wait-1.0",
+		"boss_alice_spawn",
+		"wait_until_boss_dead",
+		"pick_items",	
+	],
 	[	#Stage 1
 		"wait-1.0",
 		"bullet_pattern_down",
@@ -590,3 +597,6 @@ func boss_aunn_spawn():
 	
 func boss_narumi_spawn():
 	point_spawn_boss(narumi_boss, Vector2(640.0,250.0))
+	
+func boss_alice_spawn():
+	point_spawn_boss(alice_boss, Vector2(640.0,250.0))

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjb5g25vhisq7"]
+
+[ext_resource type="Script" uid="uid://5ctu0kqpnnb6" path="res://scripts/boss/skills/spiral-test-2.gd" id="1_8jfpa"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8jfpa")
+
+[node name="Marker2D" type="Marker2D" parent="."]

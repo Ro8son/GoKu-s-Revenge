@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c21e3i1sqopg8"]
+
+[ext_resource type="Script" uid="uid://bev4op2mror0m" path="res://scripts/boss/alice-boss.gd" id="1_su3gm"]
+[ext_resource type="SpriteFrames" uid="uid://dnuv8wb6rkc4d" path="res://scenes/bosses/alice.tres" id="2_su3gm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbl7o"]
+radius = 39.0
+height = 88.0
+
+[node name="AliceBoss" type="Area2D"]
+script = ExtResource("1_su3gm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_su3gm")
+animation = &"cast"
+autoplay = "idle"
+frame_progress = 0.186116
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 14)
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_qbl7o")
