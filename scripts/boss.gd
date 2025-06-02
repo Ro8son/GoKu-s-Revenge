@@ -19,9 +19,19 @@ var health_bar: ProgressBar
 
 #Used to cancel boss logic on death
 var interrupt = false
-var ends: Array[bool]
-var currrent := 0
-var end := false
+var end = false
+
+#If you add any moves to base class add them here
+var not_moves = [
+	"_ready",
+	"logic",
+	"_on_body_entered",
+	"get_hit",
+	"spawn_explosions",
+	"flash",
+	"points_on_circle"
+]
+
 
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 var shader_material: ShaderMaterial
@@ -31,10 +41,6 @@ func _ready():
 	
 	add_to_group("bosses")
 	
-	for x in range(5):
-		ends.append(false)
-
-	
 	if moves.is_empty():
 		var a = get_script().get_script_method_list()
 		moves.clear()
@@ -43,10 +49,7 @@ func _ready():
 				moves.append(i.name)
 			if i.name.ends_with("_background"):
 				background_moves.append(i.name)
-	
-	print(moves)
-	print(background_moves)
-	
+		
 	body_entered.connect(_on_body_entered)
 	
 	hp = max_hp
@@ -89,14 +92,6 @@ func logic():
 func background_logic():
 	while not interrupt:
 		await call(background_moves.pick_random())
-
-
-func next_stage_hp(percentage: int):
-	while hp * 100 / max_hp > percentage and not interrupt:
-		await get_tree().create_timer(1).timeout
-	print("next stage!")
-	ends[currrent] = true
-	currrent += 1
 				
 #Hits the player if they walk into the boss
 func _on_body_entered(body: Node2D):
@@ -112,12 +107,10 @@ func get_hit(damage):
 			if health_bar != null:
 				health_bar.value = hp/max_hp
 			if hp <= 0:
-				print("boss dead!")
 				can_get_hit = false
 				get_tree().get_nodes_in_group("player")[0].ability_charge = 100
 				health_bar.value = 0
 				interrupt = true
-				print("interrupt triggered!")
 				get_node("/root/Main/Debug-UI").enemies += 1
 				await spawn_explosions()
 				queue_free()

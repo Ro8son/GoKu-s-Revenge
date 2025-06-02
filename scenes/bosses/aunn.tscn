@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://jm14d6psm5t2"]
 
-[ext_resource type="Script" uid="uid://i3dl76srrpbl" path="res://scripts/boss/aunn-boss.gd" id="1_gkor5"]
+[ext_resource type="Script" uid="uid://i3dl76srrpbl" path="res://scripts/aunn-boss.gd" id="1_gkor5"]
 [ext_resource type="SpriteFrames" uid="uid://04aspyirxm5f" path="res://scenes/bosses/test.tres" id="2_1dt11"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbl7o"]
